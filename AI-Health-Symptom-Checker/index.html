@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sakhi — Your AI Health Companion | Smart Symptom Checker</title>
+  <meta name="description" content="Sakhi is your friendly AI-powered health companion that analyses your symptoms, predicts possible conditions, computes a risk score, and provides personalised medical recommendations. Not a substitute for professional advice." />
+  <meta name="keywords" content="AI symptom checker, health assistant, disease prediction, risk score, medical AI, symptom analysis" />
+  <meta name="author" content="MedAI Health Technologies" />
+  <meta property="og:title" content="Sakhi — Your AI Health Companion" />
+  <meta property="og:description" content="Sakhi: Your friendly AI health companion for conversational symptom analysis, risk scoring, and personalised recommendations." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- ── NAVBAR ─────────────────────────────────────────────── -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-brand">
+      <div class="nav-logo" aria-hidden="true">🩺</div>
+      <span>Sakhi</span>
+      <span class="nav-badge">Beta</span>
+    </div>
+    <div class="nav-disclaimer" role="note" aria-label="Medical disclaimer">
+      For informational purposes only — Not a medical diagnosis
+    </div>
+  </nav>
+
+  <div class="app-shell">
+
+    <!-- ════════════════════════════════════════════════════════
+         LANDING SECTION
+    ════════════════════════════════════════════════════════ -->
+    <section id="landingSection" role="main" aria-label="Welcome screen">
+
+      <div class="hero-badge">
+        <span class="dot" aria-hidden="true"></span>
+        Meet Sakhi · Your AI Health Companion
+      </div>
+
+      <h1 class="hero-title">
+        Meet <span class="gradient-text">Sakhi</span> — Your<br/>
+        Personal AI Health Companion
+      </h1>
+
+      <p class="hero-subtitle">
+        Just tell Sakhi how you're feeling — in your own words.
+        She'll analyse your symptoms, identify possible conditions,
+        compute a <strong>risk urgency score</strong>, and guide you
+        with clear, personalised health advice — in seconds.
+      </p>
+
+      <!-- Feature pills -->
+      <div class="feature-pills" role="list" aria-label="Key features">
+        <div class="feature-pill" role="listitem">
+          <span class="pill-icon" aria-hidden="true">💬</span>
+          <span>Conversational AI</span>
+        </div>
+        <div class="feature-pill" role="listitem">
+          <span class="pill-icon" aria-hidden="true">📊</span>
+          <span>Risk Score 0–100</span>
+        </div>
+        <div class="feature-pill" role="listitem">
+          <span class="pill-icon" aria-hidden="true">🔬</span>
+          <span>33+ Conditions Mapped</span>
+        </div>
+        <div class="feature-pill" role="listitem">
+          <span class="pill-icon" aria-hidden="true">👨‍⚕️</span>
+          <span>Specialist Recommendations</span>
+        </div>
+        <div class="feature-pill" role="listitem">
+          <span class="pill-icon" aria-hidden="true">⚡</span>
+          <span>Instant Results</span>
+        </div>
+        <div class="feature-pill" role="listitem">
+          <span class="pill-icon" aria-hidden="true">🔒</span>
+          <span>Private & Secure</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-wrapper">
+        <button id="startBtn" aria-label="Start symptom check">
+          <span>Start Symptom Check</span>
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+        <p class="cta-note" role="note">
+          <span aria-hidden="true">🔒</span>
+          No sign-up required · Runs entirely in your browser · 100% private
+        </p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row" role="list" aria-label="Platform statistics">
+        <div class="stat-item" role="listitem">
+          <div class="stat-number">33+</div>
+          <div class="stat-desc">Conditions Mapped</div>
+        </div>
+        <div class="stat-item" role="listitem">
+          <div class="stat-number">72+</div>
+          <div class="stat-desc">Multiclass Symptom Groups</div>
+        </div>
+        <div class="stat-item" role="listitem">
+          <div class="stat-number">4</div>
+          <div class="stat-desc">Urgency Levels</div>
+        </div>
+        <div class="stat-item" role="listitem">
+          <div class="stat-number">ICD-11</div>
+          <div class="stat-desc">Standard Codes</div>
+        </div>
+      </div>
+
+      <!-- Quick symptom chips -->
+      <div class="quick-symptoms-section" id="quickSymptoms" aria-label="Common symptoms quick access">
+        <h3>Common Symptom Combinations</h3>
+        <div class="quick-chips" role="list">
+          <button class="quick-chip" data-symptom="fever, headache, body ache" aria-label="Enter fever with headache and body ache">🤒 Fever + Headache + Body ache</button>
+          <button class="quick-chip" data-symptom="cough, cold, sore throat, runny nose" aria-label="Enter cough cold and sore throat">🤧 Cough + Cold + Sore throat</button>
+          <button class="quick-chip" data-symptom="chest pain, breathlessness, palpitations" aria-label="Enter chest pain with breathlessness">❤️ Chest pain + Breathless</button>
+          <button class="quick-chip" data-symptom="nausea, vomiting, diarrhea, stomach pain" aria-label="Enter nausea and stomach problems">🤢 Nausea + Vomiting + Diarrhea</button>
+          <button class="quick-chip" data-symptom="dizziness, fatigue, weakness, pale" aria-label="Enter dizziness and fatigue">😵 Dizziness + Fatigue</button>
+          <button class="quick-chip" data-symptom="fever, joint pain, rash, weakness" aria-label="Enter fever with joint pain and rash">🦟 Fever + Joint pain + Rash</button>
+          <button class="quick-chip" data-symptom="excessive thirst, frequent urination, fatigue" aria-label="Enter excessive thirst and frequent urination">💧 Excessive thirst + Frequent urination</button>
+          <button class="quick-chip" data-symptom="back pain, burning urination, frequent urination" aria-label="Enter back pain with urinary symptoms">🔥 Back pain + Burning urination</button>
+        </div>
+      </div>
+
+    </section><!-- /landingSection -->
+
+    <!-- ════════════════════════════════════════════════════════
+         CHAT SECTION
+    ════════════════════════════════════════════════════════ -->
+    <section id="chatSection" class="hidden" aria-label="Symptom chat interface" role="main">
+      <div class="chat-layout">
+
+        <!-- Sidebar -->
+        <aside class="chat-sidebar" aria-label="Chat progress and information">
+
+          <!-- Progress -->
+          <div class="sidebar-card progress-section">
+            <h4>Sakhi's Progress</h4>
+            <div class="progress-header">
+              <span id="stepIndicator" aria-live="polite">Step 0 of 5</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-label="Analysis progress" aria-valuemin="0" aria-valuemax="100">
+              <div id="progressBar"></div>
+            </div>
+          </div>
+
+          <!-- Detected symptoms -->
+          <div class="sidebar-card detected-sidebar">
+            <h4>Detected Symptoms</h4>
+            <div id="sidebarSymptoms" aria-live="polite" aria-label="Currently detected symptoms">
+              <span style="font-size:0.78rem;color:var(--text-muted)">None yet — describe your symptoms below</span>
+            </div>
+          </div>
+
+          <!-- Tips -->
+          <div class="sidebar-card">
+            <h4>💡 Tips</h4>
+            <ul class="tips-list" aria-label="Helpful tips">
+              <li>Describe symptoms in your own words</li>
+              <li>Include duration & severity</li>
+              <li>Mention any known conditions</li>
+              <li>Be specific for better results</li>
+              <li>This is not a substitute for a doctor</li>
+            </ul>
+          </div>
+
+          <!-- Restart -->
+          <button id="restartBtn" aria-label="Restart symptom check from beginning">
+            <span aria-hidden="true">↺</span> Start Over
+          </button>
+
+        </aside>
+
+        <!-- Chat Main -->
+        <div class="chat-main">
+
+          <!-- Chat Header -->
+          <div class="chat-header">
+            <div class="chat-avatar" aria-hidden="true">🩺</div>
+            <div class="chat-header-info">
+              <h3>Sakhi — AI Health Companion</h3>
+              <div class="chat-status">
+                <span class="status-dot" aria-hidden="true"></span>
+                Online · Ready to Help You
+              </div>
+            </div>
+          </div>
+
+          <!-- Messages -->
+          <div id="chatMessages" role="log" aria-live="polite" aria-label="Chat messages" aria-relevant="additions">
+            <!-- Typing indicator (always present, shown/hidden) -->
+            <div id="typingIndicator" class="typing-indicator hidden" aria-label="Sakhi is typing" role="status">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <small>Sakhi is thinking...</small>
+            </div>
+          </div>
+
+          <!-- Input Bar -->
+          <div class="chat-input-bar" role="form" aria-label="Message input area">
+            <textarea
+              id="userInput"
+              placeholder="Describe your symptoms… e.g. I have fever, headache and feel very weak"
+              rows="1"
+              aria-label="Type your symptoms here"
+              aria-multiline="true"
+              autocomplete="off"
+              spellcheck="true"
+            ></textarea>
+            <button id="sendBtn" aria-label="Send message">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+
+        </div><!-- /chat-main -->
+      </div><!-- /chat-layout -->
+    </section><!-- /chatSection -->
+
+    <!-- ════════════════════════════════════════════════════════
+         RESULT SECTION
+    ════════════════════════════════════════════════════════ -->
+    <section id="resultSection" class="hidden" role="main" aria-label="Analysis results">
+      <div class="result-container">
+
+        <!-- Header -->
+        <div class="result-header">
+          <h2>🩺 Your <span>Sakhi Health Report</span></h2>
+          <p>Generated by Sakhi based on your symptoms and profile. Always confirm with a qualified healthcare professional.</p>
+        </div>
+
+        <!-- Risk Score Card -->
+        <div id="riskScoreCard" role="region" aria-label="Overall risk score">
+          <div class="gauge-wrapper" aria-hidden="true">
+            <svg class="gauge-svg" viewBox="0 0 120 120">
+              <circle class="gauge-track" cx="60" cy="60" r="54"/>
+              <circle id="riskGauge" cx="60" cy="60" r="54"/>
+            </svg>
+            <div class="gauge-text">
+              <span id="riskScoreValue" aria-label="Risk score">--</span>
+              <small>/ 100</small>
+            </div>
+          </div>
+
+          <div class="risk-info">
+            <div id="riskScoreLabel" aria-live="polite">Calculating...</div>
+            <span id="urgencyBadge" aria-live="polite">--</span>
+            <p class="risk-meta" id="riskMeta">Based on your reported symptoms, profile, and medical knowledge base.</p>
+            <div>
+              <p class="detected-label">Symptoms Detected</p>
+              <div id="detectedSymptoms" role="list" aria-label="Detected symptoms"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="result-tabs" role="tablist" aria-label="Result sections">
+          <button class="tab-btn active" data-tab="predictions" role="tab" aria-selected="true" id="tab-btn-predictions">🔬 Conditions</button>
+          <button class="tab-btn" data-tab="actions" role="tab" aria-selected="false" id="tab-btn-actions">⚡ Actions</button>
+          <button class="tab-btn" data-tab="lifestyle" role="tab" aria-selected="false" id="tab-btn-lifestyle">💊 Recommendations</button>
+        </div>
+
+        <!-- Tab: Predictions -->
+        <div class="tab-panel" id="tab-predictions" role="tabpanel" aria-labelledby="tab-btn-predictions">
+          <div id="predictionsContainer" aria-label="Disease predictions"></div>
+        </div>
+
+        <!-- Tab: Actions -->
+        <div class="tab-panel hidden" id="tab-actions" role="tabpanel" aria-labelledby="tab-btn-actions">
+          <div id="immediateActions" aria-label="Immediate action recommendations">
+            <h3 id="actionTitle"></h3>
+            <ul id="actionList" aria-label="Action steps"></ul>
+          </div>
+        </div>
+
+        <!-- Tab: Lifestyle -->
+        <div class="tab-panel hidden" id="tab-lifestyle" role="tabpanel" aria-labelledby="tab-btn-lifestyle">
+          <div class="lifestyle-card">
+            <h3>🌿 Personalised Health Recommendations</h3>
+            <ul id="lifestyleList" aria-label="Lifestyle recommendations"></ul>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer-card" role="note" aria-label="Medical disclaimer">
+          <h4>⚠️ Important Medical Disclaimer</h4>
+          <p>
+            This report was generated by <strong>Sakhi</strong> — an AI health companion — on
+            <strong id="disclaimerDate"></strong>. It is for <strong>informational purposes only</strong>
+            and does <strong>not</strong> constitute a medical diagnosis, clinical opinion, or professional advice.
+            Always verify with a <strong>licensed healthcare professional</strong> before making health decisions.
+            In a medical emergency, call <strong>108 (India)</strong> / <strong>911 (USA)</strong> / <strong>999 (UK)</strong> immediately.
+          </p>
+        </div>
+
+        <!-- Result Actions -->
+        <div class="result-actions">
+          <button id="restartBtnResult" aria-label="Start a new symptom check">
+            <span aria-hidden="true">🔄</span> New Analysis
+          </button>
+          <button class="print-btn" onclick="window.print()" aria-label="Print this report">
+            <span aria-hidden="true">🖨️</span> Print Report
+          </button>
+        </div>
+
+      </div><!-- /result-container -->
+    </section><!-- /resultSection -->
+
+  </div><!-- /app-shell -->
+
+  <!-- Scripts (order matters: knowledge-base first, then app controller) -->
+  <script src="knowledge-base.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
