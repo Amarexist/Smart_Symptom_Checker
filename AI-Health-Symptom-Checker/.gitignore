@@ -1,0 +1,18 @@
+# Environment
+.env
+.venv/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Large model files (exceed GitHub 100MB limit)
+*.joblib
+
+# Archives
+*.zip
